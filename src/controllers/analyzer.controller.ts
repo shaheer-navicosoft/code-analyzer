@@ -1,10 +1,11 @@
 import AnalyzerService from "../services/analyzer.service";
 import { Request, Response } from "express";
-
-class AnalyzerController {
+import BaseController from "./base.controller";
+class AnalyzerController extends BaseController {
   private readonly analyzerService: AnalyzerService;
 
   constructor() {
+    super();
     this.analyzerService = new AnalyzerService();
   }
 
@@ -13,14 +14,17 @@ class AnalyzerController {
       const { code } = req.body;
 
       if (!code) {
-         res.status(400).json({ error: "Code snippet is required." });
-         return;
+        this.sendError({ res, status: 400, message: "Code field is required" });
       }
 
       const results = await this.analyzerService.analyzeCode(code);
-      res.json(results);
+      this.sendSuccess({
+        res,
+        message: "Code analyzed successfully",
+        data: results,
+      });
     } catch (error) {
-      res.status(500).json({ error: "An error occurred while analyzing the code. " + error });
+      this.sendError({ res, status: 500, message: error as string });
     }
   };
 }
