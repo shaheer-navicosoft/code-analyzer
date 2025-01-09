@@ -1,8 +1,8 @@
 import { Router } from "express";
-import AnalyzerController from "../controllers/analyzer.controller";
+import analyzerController from "../controllers/analyzer.controller";
 
 const router = Router();
 
-router.post("/analyze", AnalyzerController.analyzeCode);
+router.post("/analyze", analyzerController.analyzeCode);
 
 export default router;
