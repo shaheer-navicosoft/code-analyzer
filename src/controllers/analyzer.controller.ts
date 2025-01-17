@@ -5,6 +5,7 @@ import BaseController from "./base.controller";
  * Controller class responsible for handling code analysis requests.
  * Extends the BaseController class.
  */
+
 class AnalyzerController extends BaseController {
   /**
    * Service instance used for analyzing code.
